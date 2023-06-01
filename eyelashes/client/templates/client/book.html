@@ -14,8 +14,7 @@
 <header>
     <nav>
         <a href="{% url 'home' %}">Домашняя страница</a>
-        <a href="">Отменить бронирование</a>
-        <a href="">Контакты с менеджером</a>
+        <a href="{% url 'manager_contacts' %}">Контакты с менеджером</a>
     </nav>
 </header>
 <div class="booking">
@@ -67,6 +66,9 @@
         </table>
     </div>
 
+</div>
+<div class="postscriptum">
+    <p class="paragraph_ps">* Чтобы отменить запись, свяжитесь с <a href="{% url 'manager_contacts' %}">менеджером</a> по viber или whatsapp.
 </div>
 <footer>
     <nav>

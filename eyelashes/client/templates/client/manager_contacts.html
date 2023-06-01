@@ -1,0 +1,28 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block tittle %} {{the_tittle}} {% endblock %}
+{% block stylelink %}
+<link rel="stylesheet" href="{% static 'client/css/managercontactsstyle.css' %}">
+{% endblock %}
+{% block body %}
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Домашняя страница</a>
+        <a href="{% url 'book' 'now' %}">Забронировать</a>
+    </nav>
+</header>
+<div id="blockContacts">
+    <div class="contacts">
+        <p>Пожалуйста, не звоните, а пишите через viber или whatsapp.</p>
+        <p>Номер телефона: +375 (11) 11 11 111 </p>
+        <p>Ссылка в VK: <a href="https://vk.com/">ВКонтакте</a></p>
+    </div>
+</div>
+
+<!--<footer>
+    <nav>
+        <a href="/admin/">Для администратора</a>
+        <a href="{% url 'manager_page' %}">Для менеджера</a>
+    </nav>
+</footer>-->
+{% endblock %}

@@ -121,6 +121,11 @@ def filling_book(request: HttpRequest) -> HttpResponse:
             return HttpResponse(f"ERROR, ObjectDoesNotExist {cur_day}.{cur_month}.{cur_year} {cur_time}. POST METHOD")
 
 
+def manager_contacts(request: HttpRequest) -> HttpResponse:
+    the_tittle = "Контакты с менеджером"
+    return render(request, "client/manager_contacts.html", context={"the_tittle": the_tittle,})
+
+
 def manager_logged_in(request: HttpRequest) -> HttpResponse:
     the_tittle = "Вход на страницу менеджера"
     if request.method == "GET":
