@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'client/css/base.css' %}">
+    {% block stylelink %} {% endblock %}
+    <title>{% block tittle %}{% endblock %}</title>
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% block tittle %} {{the_tittle}} {% endblock %}
+{% block stylelink %}
+<link rel="stylesheet" href="{% static 'client/css/bookstyle.css' %}">
+<script src="{% static 'client/scripts/book.js' %}"></script>
+{% endblock %}
+{% block body %}
+{% if messages %}
+    {% for message in messages %}
+    <script>alert("{{ message|safe }}");</script>
+    {% endfor %}
+{% endif %}
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Домашняя страница</a>
+        <a href="">Отменить бронирование</a>
+        <a href="">Контакты с менеджером</a>
+    </nav>
+</header>
+<div class="booking">
+    <div class="heading">
+        <H2>Бронирование</H2>
+        <p>Выбор даты и времени</p>
+    </div>
+    <div class="choose_book">
+        <div id="selectMonth" onclick="chooseMonth()">
+            {% for month in all_months %}
+                {%if month == choose_month %}
+                    <div id="selected">{{ month }}</div>
+                {%else%}
+                <a class="a_choose" href="{% url 'book' month %}" hidden>
+                    <div class="choose_month">{{ month }}</div>
+                </a>
+                {%endif%}
+            {% endfor%}
+        </div>
+        <table>
+            <tr>
+                <th>ПН</th>
+                <th>ВТ</th>
+                <th>СР</th>
+                <th>ЧТ</th>
+                <th>ПТ</th>
+                <th>СБ</th>
+                <th>ВС</th>
+            </tr>
+            {% for week in month_data %}
+            <tr>
+                {% for day in week %}
+                <td>
+                    {% if day.0 %}
+                        {{ day.0 }} <br/>
+                        {% if day.2 and cur_month == choose_month and day.0 > cur_day %}
+                            {% for k, v in day.2.items %}
+                                {% if not v %}
+                                <a href="{% url 'filling_book'%}?day={{day.0}}&month={{choose_month}}&year={{cur_year}}&time={{k}}">Свободно в {{k}}</a>
+                                <br/>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+<footer>
+    <nav>
+        <a href="/admin/">Для администратора</a>
+        <a href="{% url 'manager_page' %}">Для менеджера</a>
+    </nav>
+</footer>
+{% endblock %}
