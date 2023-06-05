@@ -1,0 +1,17 @@
+{% extends 'client/manager.html' %}
+{% load static %}
+{% block tittle %} {{the_tittle}} {% endblock %}
+{% block stylelink %}
+<link rel="stylesheet" href="{% static 'client/css/managerstyle.css' %}">
+{% endblock %}
+{% block table%}
+<div class="main_manager">
+    <div class="headingH1">Страница менеджера</div>
+    <a href="{% url 'manager_clients_table' %}"><div class="tittleBlock">Клиенты</div></a>
+    <a href="{% url 'manager_booking_table' %}"><div class="tittleBlock">Бронирование</div></a>
+    <div class="tittleBlock" id="tittleMainBlock">Календарь</div>
+    <div id="calendarBlock">
+        Calendar
+    </div>
+</div>
+{% endblock%}

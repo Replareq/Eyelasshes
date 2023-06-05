@@ -47,7 +47,7 @@ nav > a:hover{
     padding: 25px 0;
 }
 
-#tittleClientsBlock, #tittleBookingBlock, #tittleCalendarBlock {
+.tittleBlock {
     position: relative;
     display: inline-block;
     width: 150px;
@@ -78,15 +78,15 @@ nav > a:hover{
 
 /*Client Block*/
 
-#tittleClientsBlock {
+#tittleMainBlock {
     background-color: #FAFAFA;
 }
 
-#tittleClientsBlock:hover, #tittleBookingBlock:hover, #tittleCalendarBlock:hover {
+.tittleBlock:hover {
     box-shadow: 0 0 5px #303030;
 }
 
-#tittleClientsBlock:active, #tittleBookingBlock:active, #tittleCalendarBlock:active {
+.tittleBlock:active {
     background-color: #EEEEEE;
     box-shadow: 0 0 10px #303030, inset 0 0 10px #303030;
 }
@@ -105,8 +105,8 @@ nav > a:hover{
     padding: 25px 0;
 }
 
-#searchClient, #addClientButton, #removeClientButton,
-#searchBooking, #addBookingButton, #removeBookingButton {
+#searchClient, #searchClientButton, #addClientButton, #removeClientButton,
+#searchBooking, #searchBookingButton, #addBookingButton, #removeBookingButton {
     position: relative;
     width: 26%;
     left: 4%;
@@ -124,6 +124,19 @@ nav > a:hover{
 #searchClient, #searchBooking {
     letter-spacing: 1px;
     border-radius: 5px;
+}
+
+#searchClient, #searchBooking {
+    width: 22%;
+}
+
+#addClientButton, #removeClientButton, #addBookingButton, #removeBookingButton {
+    left: -1%;
+}
+
+#searchClientButton, #searchBookingButton {
+    left: 0.5%;
+    width: 4%;
 }
 
 #addClientBlock, #addBookingBlock{

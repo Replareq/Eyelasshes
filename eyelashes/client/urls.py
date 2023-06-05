@@ -12,6 +12,8 @@ urlpatterns = [
     path('manager/change_client/', views.manager_change_client, name="manager_change_client"),
     path('manager/add_booking/', views.manager_add_booking, name="manager_add_booking"),
     path('manager/remove_booking/', views.manager_remove_booking, name="manager_remove_booking"),
-    path('manager/', views.manager_page, name="manager_page"),
+    path('manager/clients_table', views.manager_clients_table, name="manager_clients_table"),
+    path('manager/booking_table', views.manager_booking_table, name="manager_booking_table"),
+    path('manager/booking_calendar', views.manager_calendar, name="manager_calendar"),
     path('', views.home, name="home"),
 ]

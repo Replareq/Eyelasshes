@@ -123,7 +123,7 @@ def filling_book(request: HttpRequest) -> HttpResponse:
 
 def manager_contacts(request: HttpRequest) -> HttpResponse:
     the_tittle = "Контакты с менеджером"
-    return render(request, "client/manager_contacts.html", context={"the_tittle": the_tittle,})
+    return render(request, "client/manager_contacts.html", context={"the_tittle": the_tittle, })
 
 
 def manager_logged_in(request: HttpRequest) -> HttpResponse:
@@ -146,13 +146,12 @@ def manager_logged_out(request: HttpRequest) -> HttpResponse:
     return redirect(manager_logged_in)
 
 
-def manager_page(request: HttpRequest) -> HttpResponse:
+def manager_clients_table(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
         return redirect(manager_logged_in)
 
-    the_tittle = "Страница менеджера"
+    the_tittle = "База клиентов"
 
-    booking = Booked.objects.all().order_by("datetime")
     clients = Client.objects.all()
 
     search = request.GET.get("searchClient")
@@ -161,6 +160,18 @@ def manager_page(request: HttpRequest) -> HttpResponse:
             union(Client.objects.filter(phone__icontains=search)). \
             union(Client.objects.filter(history__icontains=search))
 
+    return render(request, "client/manager_clients_table.html",
+                  context={"the_tittle": the_tittle, "clients": clients, })
+
+
+def manager_booking_table(request: HttpRequest) -> HttpResponse:
+    if not request.user.is_authenticated:
+        return redirect(manager_logged_in)
+
+    the_tittle = "База бронирования"
+
+    booking = Booked.objects.all().order_by("datetime")
+
     search = request.GET.get("searchBooking")
     if search is not None:
         booking = Booked.objects.filter(datetime__icontains=search). \
@@ -168,11 +179,16 @@ def manager_page(request: HttpRequest) -> HttpResponse:
             union(Booked.objects.filter(client__phone__icontains=search)). \
             union(Booked.objects.filter(comment__icontains=search))
 
-    return render(request, "client/manager.html", context={"the_tittle": the_tittle,
-                                                           "booking": booking,
-                                                           "clients": clients,
-                                                           "tab": request.GET.get("tab"),
-                                                           })
+    return render(request, "client/manager_booking_table.html", context={"the_tittle": the_tittle,
+                                                                         "booking": booking,
+                                                                         })
+
+
+def manager_calendar(request: HttpRequest) -> HttpResponse:
+    the_tittle = "Календарь"
+
+    return render(request, "client/manager_calendar.html", context={"the_tittle": the_tittle,
+                                                                    })
 
 
 def manager_add_client(request: HttpRequest) -> HttpResponse:
@@ -182,7 +198,7 @@ def manager_add_client(request: HttpRequest) -> HttpResponse:
             user_tel = int(''.join(c for c in request.POST.get('clientAddTel') if c.isdigit()))
             user_ban = False if request.POST.get('clientAddBan') is None else True
             user_history = request.POST.get('clientAddHistory') + " Добавлен " + \
-                datetime.now().strftime("%d.%m.%Y %H:%M") + ";\n"
+                           datetime.now().strftime("%d.%m.%Y %H:%M") + ";\n"
 
             # Check if the client exists
             try:
@@ -191,7 +207,7 @@ def manager_add_client(request: HttpRequest) -> HttpResponse:
             except ObjectDoesNotExist:
                 Client.objects.create(name=user_name, phone=user_tel, ban=user_ban, history=user_history)
 
-    return redirect(manager_page)
+    return redirect(manager_clients_table)
 
 
 def manager_remove_clients(request: HttpRequest) -> HttpResponse:
@@ -201,7 +217,7 @@ def manager_remove_clients(request: HttpRequest) -> HttpResponse:
             Client.objects.get(phone=int(number)).delete()
         return redirect(manager_page)
     else:
-        return redirect(manager_page)
+        return redirect(manager_clients_table)
 
 
 def manager_change_client(request: HttpRequest) -> HttpResponse:
@@ -216,9 +232,9 @@ def manager_change_client(request: HttpRequest) -> HttpResponse:
                 client.ban = True
                 client.history += " Заблокирован " + datetime.now().strftime("%d.%m.%Y %H:%M") + ";\n"
             client.save()
-        return redirect(manager_page)
+        return redirect(manager_clients_table)
     else:
-        return redirect(manager_page)
+        return redirect(manager_clients_table)
 
 
 def manager_add_booking(request: HttpRequest) -> HttpResponse:
@@ -243,7 +259,7 @@ def manager_add_booking(request: HttpRequest) -> HttpResponse:
                 except IntegrityError:
                     messages.error(request, f"Ошибка: дата записи {date} уже существует.")
 
-    return redirect(manager_page)
+    return redirect(manager_booking_table)
 
 
 def manager_remove_booking(request: HttpRequest) -> HttpResponse:
@@ -253,4 +269,4 @@ def manager_remove_booking(request: HttpRequest) -> HttpResponse:
             Booked.objects.get(id=int(number.replace("check", ""))).delete()
         return HttpResponse()
     else:
-        return redirect(manager_page)
+        return redirect(manager_booking_table)
