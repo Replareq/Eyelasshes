@@ -24,39 +24,47 @@ def book(request: HttpRequest, user_month: str) -> HttpResponse:
                  "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь")
     the_tittle = "Бронирование наращивания ресниц"
 
-    cur_day = datetime.now().day
     cur_month = datetime.now().month
-    if user_month in all_month:
-        cur_month = all_month.index(user_month) + 1
     cur_year = datetime.now().year
 
+    if user_month == "now":
+        user_month = all_month[cur_month-1] + " " + str(cur_year)
+
+    selected_month = all_month.index(user_month.split()[0]) + 1
+    selected_year = int(user_month.split()[1])
+
     calendar = Calendar(0)
-    month = calendar.monthdays2calendar(cur_year, cur_month)
+    month = calendar.monthdays2calendar(selected_year, selected_month)
 
     month_data = []
     for week in month:
         month_data.append([])
         for day in week:
-            book_day = Booked.objects.filter(datetime__year=cur_year,
-                                             datetime__month=cur_month,
+            book_day = Booked.objects.filter(datetime__year=selected_year,
+                                             datetime__month=selected_month,
                                              datetime__day=day[0])
-            month_data[-1].append([day[0], day[1], {item.datetime.time: item.client for item in book_day}])
+            month_data[-1].append([day[0], day[1],
+                                   {item.datetime.time: item.client for item in book_day
+                                    if item.datetime > datetime.today() + timedelta(days=0.5)}])
 
     return render(request, "client/book.html", context={"the_tittle": the_tittle,
                                                         "month_data": month_data,
-                                                        "all_months": all_month[cur_month - 1:] + all_month[
-                                                                                                  :cur_month - 1],
-                                                        "cur_day": cur_day,
-                                                        "cur_month": all_month[datetime.now().month - 1],
-                                                        "choose_month": all_month[cur_month - 1],
-                                                        "cur_year": cur_year,
+                                                        "all_months": [i_month + " " + str(cur_year)
+                                                                       for i_month in
+                                                                       all_month[datetime.now().month - 1:]] +
+                                                                      [i_month + " " + str(cur_year+1)
+                                                                       for i_month in
+                                                                       all_month[:datetime.now().month - 1]],
+                                                        "selected_month": all_month[selected_month - 1] +
+                                                                        " " + str(selected_year),
+                                                        "selected_year": str(selected_year),
                                                         })
 
 
 def filling_book(request: HttpRequest) -> HttpResponse:
     day = request.GET.get("day")
-    month = request.GET.get("month")
-    year = request.GET.get("year")
+    month = request.GET.get("monthYear").split()[0]
+    year = request.GET.get("monthYear").split()[1]
     time = request.GET.get("time")
 
     all_month = ("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
@@ -136,7 +144,7 @@ def manager_logged_in(request: HttpRequest) -> HttpResponse:
         user = authenticate(username=user_name, password=user_password)
         if user is not None:
             login(request, user)
-            return redirect(manager_page)
+            return redirect(manager_clients_table)
         else:
             return render(request, "client/logged_in.html", context={"the_tittle": the_tittle, "error": True})
 
@@ -186,8 +194,34 @@ def manager_booking_table(request: HttpRequest) -> HttpResponse:
 
 def manager_calendar(request: HttpRequest) -> HttpResponse:
     the_tittle = "Календарь"
+    all_month = ("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                 "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь")
+
+    if request.GET.get("monthYear"):
+        selected_month = all_month.index(request.GET.get("monthYear").split()[0]) + 1
+        selected_year = int(request.GET.get("monthYear").split()[1])
+    else:
+        selected_month = datetime.now().month
+        selected_year = datetime.now().year
+
+    calendar = Calendar(0)
+    month = calendar.monthdays2calendar(selected_year, selected_month)
+
+    month_data = []
+    for week in month:
+        month_data.append([])
+        for day in week:
+            book_day = Booked.objects.filter(datetime__year=selected_year,
+                                             datetime__month=selected_month,
+                                             datetime__day=day[0])
+            month_data[-1].append([day[0], day[1],
+                                   {item.datetime.time: item.client for item in book_day}])
 
     return render(request, "client/manager_calendar.html", context={"the_tittle": the_tittle,
+                                                                    "selected_month": all_month[selected_month - 1],
+                                                                    "selected_year": str(selected_year),
+                                                                    "all_months": all_month,
+                                                                    "month_data": month_data,
                                                                     })
 
 
@@ -215,7 +249,7 @@ def manager_remove_clients(request: HttpRequest) -> HttpResponse:
         clients_remove = json.loads(request.body.decode("utf-8")).get("dataClientsRemove")
         for number in clients_remove:
             Client.objects.get(phone=int(number)).delete()
-        return redirect(manager_page)
+        return redirect(manager_clients_table)
     else:
         return redirect(manager_clients_table)
 

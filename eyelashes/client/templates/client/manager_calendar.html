@@ -2,7 +2,8 @@
 {% load static %}
 {% block tittle %} {{the_tittle}} {% endblock %}
 {% block stylelink %}
-<link rel="stylesheet" href="{% static 'client/css/managerstyle.css' %}">
+<link rel="stylesheet" href="{% static 'client/css/managercalendarstyle.css' %}">
+<script src="{% static 'client/scripts/manager_calendar.js' %}"></script>
 {% endblock %}
 {% block table%}
 <div class="main_manager">
@@ -11,7 +12,42 @@
     <a href="{% url 'manager_booking_table' %}"><div class="tittleBlock">Бронирование</div></a>
     <div class="tittleBlock" id="tittleMainBlock">Календарь</div>
     <div id="calendarBlock">
-        Calendar
+        <div id="selectMonthYear" onclick="chooseMonth()">
+            <div id="selectedMonth">{{ selected_month }}</div>
+            {% for month in all_months %}
+                <div class="choose_month" onclick="selectNewMonth(this)" hidden>
+                    {{ month }}
+                </div>
+            {% endfor%}
+        </div>
+        <input id="selectedYear" type="number" maxlength="4" step="1" value="{{ selected_year }}"/>
+        <input id="btnSelect" type="button" value="Выбрать" onclick="selectMonthYear()"/>
+
+        <table>
+            <tr>
+                <th>ПН</th>
+                <th>ВТ</th>
+                <th>СР</th>
+                <th>ЧТ</th>
+                <th>ПТ</th>
+                <th>СБ</th>
+                <th>ВС</th>
+            </tr>
+            {% for week in month_data %}
+            <tr>
+                {% for day in week %}
+                <td>
+                    {% if day.0 %}
+                        {{ day.0 }} <br/>
+                        {% for k, v in day.2.items %}
+                            <p>{{ k }} is {{ v }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 </div>
 {% endblock%}
