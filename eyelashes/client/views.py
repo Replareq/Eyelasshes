@@ -220,7 +220,7 @@ def manager_calendar(request: HttpRequest) -> HttpResponse:
     return render(request, "client/manager_calendar.html", context={"the_tittle": the_tittle,
                                                                     "selected_month": all_month[selected_month - 1],
                                                                     "selected_year": str(selected_year),
-                                                                    "all_months": all_month,
+                                                                    "all_months": json.dumps(all_month),
                                                                     "month_data": month_data,
                                                                     })
 

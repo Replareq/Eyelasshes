@@ -12,7 +12,7 @@
     <a href="{% url 'manager_booking_table' %}"><div class="tittleBlock">Бронирование</div></a>
     <div class="tittleBlock" id="tittleMainBlock">Календарь</div>
     <div id="calendarBlock">
-        <div id="selectMonthYear" onclick="chooseMonth()">
+        <!--<div id="selectMonthYear" onclick="chooseMonth()">
             <div id="selectedMonth">{{ selected_month }}</div>
             {% for month in all_months %}
                 <div class="choose_month" onclick="selectNewMonth(this)" hidden>
@@ -21,7 +21,10 @@
             {% endfor%}
         </div>
         <input id="selectedYear" type="number" maxlength="4" step="1" value="{{ selected_year }}"/>
-        <input id="btnSelect" type="button" value="Выбрать" onclick="selectMonthYear()"/>
+        <input id="btnSelect" type="button" value="Выбрать" onclick="selectMonthYear()"/>-->
+        <button id="prevMonth" onclick="prevMonth('{{selected_month}}',{{selected_year}},{{all_months}})">Предыдущий месяц</button>
+        <input id="selectedYear" value="{{ selected_month }} {{ selected_year }}" disabled/>
+        <button id="nextMonth" onclick="nextMonth('{{selected_month}}',{{selected_year}},{{all_months}})">Следующий месяц</button>
 
         <table>
             <tr>
@@ -38,9 +41,13 @@
                 {% for day in week %}
                 <td>
                     {% if day.0 %}
-                        {{ day.0 }} <br/>
+                    <p class="p_day_table"> {{ day.0 }} </p>
                         {% for k, v in day.2.items %}
-                            <p>{{ k }} is {{ v }}</p>
+                            {% if v %}
+                            <p>{{ k }}: {{ v.name }} {{ v.phone }}</p>
+                            {% else %}
+                            <p>{{ k }}: свободно </p>
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 </td>
