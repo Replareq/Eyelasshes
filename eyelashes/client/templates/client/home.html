@@ -3,6 +3,7 @@
 {% block tittle %} {{the_tittle}} {% endblock %}
 {% block stylelink %}
 <link rel="stylesheet" href="{% static 'client/css/homestyle.css' %}">
+<link rel="stylesheet" href="{% static 'client/css/mhomestyle.css' %}">
 {% endblock %}
 {% block body %}
 <div class="home">
@@ -14,6 +15,9 @@
         <a href="{% url 'book' 'now'%}"><div class="button_book">
             <p>Забронировать</p>
         </div></a>
+        <div class="about">
+            О сайте
+        </div>
     </div>
 </div>
 {% endblock %}

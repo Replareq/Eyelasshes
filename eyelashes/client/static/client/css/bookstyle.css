@@ -40,18 +40,17 @@ nav > a:hover{
     position: relative;
     width: 100%;
     height: 120%;
-    min-height: 100vh;
 
     padding: 0 0 50px 0;
 }
 
 .heading{
     position: relative;
-    width: 50%;
+    width: 80%;
     left: 10%;
 
     font-family: Tahoma;
-    font-size: 20px;
+    font-size: 1.5vw;
     color: #696969;
     letter-spacing: 3px;
 
@@ -69,7 +68,6 @@ nav > a:hover{
 
     width: 75%;
     height: 50%;
-    min-height: 500px;
     left: 10%;
 
     padding: 25px;
@@ -78,7 +76,7 @@ nav > a:hover{
 #selectMonth {
     position: relative;
 
-    width: 250px;
+    width: 30%;
     height: 40px;
     margin: 0 0 20px 0;
 
@@ -100,7 +98,7 @@ nav > a:hover{
 
 #selected{
     font-family: Tahoma;
-    font-size: 20px;
+    font-size: 1.7vw;
     color: #696969;
 
     text-shadow: 1px 1px 1px #020202;
@@ -127,7 +125,7 @@ nav > a:hover{
 
 .choose_month {
     position: relative;
-    width: 250px;
+    width: 100%;
 
     background: #FEFEFE;
     border: 2px solid #dddddd;
@@ -135,7 +133,7 @@ nav > a:hover{
     text-align: center;
 
     font-family: Tahoma;
-    font-size: 16px;
+    font-size: 1.3vw;
     color: #696969;
 
     text-shadow: 1px 1px 1px #020202;
@@ -177,39 +175,69 @@ th {
 	background: #efefef;
 	border: 1px solid #dddddd;
 
-    font-size: 20px;
+    font-size: 1.5vw;
     text-shadow: 1px 1px 1px #020202;
     color: #696969;
 }
 
 td {
     width: 14%;
-    height: 80px;
 
     border: 1px solid #dddddd;
-	padding: 5px;
 
     vertical-align: top;
     text-align: left;
 
-    font-size: 20px;
+    font-size: 1.5vw;
     text-shadow: 1px 1px 1px #020202;
 }
 
-td > a {
+.block_day{
+    width: 100%;
+    height: 12vh;
+
+    cursor: pointer;
+}
+
+.block_day:hover{
+    background-color: #F7F7F7;
+}
+
+.block_day>p{
+    padding: 0.5vw;
+}
+
+.block_choose_day{
+    position: absolute;
+    left: 25%;
+    top: 22%;
+
+    width: 50%;
+    height: 50%;
+
+    background-color: #FEFEFE;
+	border: 2px solid #dddddd;
+
+	z-index: 5;
+	cursor: default;
+}
+
+.block_choose_day > a {
     text-decoration: none;
-    font-size: 15px;
+    font-size: 1vw;
     text-shadow: none;
     color: #efefef;
+
+    padding: 15px;
 
     text-shadow: 0 0 1px #020202;
 }
 
-td > a:link, td > a:visited{
+.block_choose_day > a:link, .block_choose_day > a:visited{
     color: #000000;
 }
 
-td > a:hover{
+.block_choose_day > a:hover{
     color: #FF5555;
 }
 
@@ -234,7 +262,7 @@ td > a:hover{
     padding: 25px;
 
     font-family: Tahoma;
-    font-size: 16px;
+    font-size: 1.1vw;
     color: #696969;
 
 }

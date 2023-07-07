@@ -3,6 +3,7 @@
 {% block tittle %} {{the_tittle}} {% endblock %}
 {% block stylelink %}
 <link rel="stylesheet" href="{% static 'client/css/bookstyle.css' %}">
+<link rel="stylesheet" href="{% static 'client/css/mbookstyle.css' %}">
 <script src="{% static 'client/scripts/book.js' %}"></script>
 {% endblock %}
 {% block body %}
@@ -48,14 +49,21 @@
                 {% for day in week %}
                 <td>
                     {% if day.0 %}
-                        {{ day.0 }} <br/>
+                    <div class="block_day" onclick="selectDay(this)">
+                        <p> {{ day.0 }} </p>
+                        <p>{% if day.2.items %} Свободно {% endif %}</p>
+                    </div>
+                    <div class="block_choose_day" onclick="deselectDay(this)" hidden>
+                        {{ day.0 }} {{ selected_month }} <br/>
                         {% for k, v in day.2.items %}
                             {% if not v %}
                             <a href="{% url 'filling_book'%}?day={{day.0}}&monthYear={{selected_month}}&time={{k}}">Свободно в {{k}}</a>
                             <br/>
                             {% endif %}
                         {% endfor %}
+                    </div>
                     {% endif %}
+
                 </td>
                 {% endfor %}
             </tr>
