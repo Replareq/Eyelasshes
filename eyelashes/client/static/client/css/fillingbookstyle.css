@@ -37,13 +37,12 @@ nav > a:hover{
 .main_manager{
     position: relative;
     width: 100%;
-
-    padding: 0 0 25px 0;
+    min-height: 100vh;
 }
 
 .main_manager > h1{
     font-family: Tahoma;
-    font-size: 20px;
+    font-size: 2vw;
     color: #696969;
 
     text-shadow: 1px 1px 1px #020202;
@@ -53,7 +52,7 @@ nav > a:hover{
 
 .block_form {
     position: relative;
-    width: 91%;
+    width: calc(100% - 100px);
     height: 80%;
 
     left: 25px;
@@ -66,7 +65,7 @@ nav > a:hover{
 
 form > p {
     font-family: Tahoma;
-    font-size: 20px;
+    font-size: 1.5vw;
     color: #696969;
 
     text-shadow: 1px 1px 1px #020202;
@@ -75,7 +74,7 @@ form > p {
 
 #name, #phone, #comment {
     font-family: Tahoma;
-    font-size: 18px;
+    font-size: 1.4vw;
     color: #696969;
 
     letter-spacing: 1px;
@@ -87,8 +86,8 @@ form > p {
 }
 
 #comment {
-    min-width: 450px;
-    max-width: 90%;
+    min-width: 35%;
+    max-width: 100%;
     min-height: 200px;
     max-height: 200px;
 

@@ -3,13 +3,14 @@
 {% block tittle %} {{the_tittle}} {% endblock %}
 {% block stylelink %}
 <link rel="stylesheet" href="{% static 'client/css/fillingbookstyle.css' %}">
+<link rel="stylesheet" href="{% static 'client/css/mfillingbookstyle.css' %}">
 <script src="{% static 'client/scripts/fillingbook.js' %}"></script>
 {% endblock %}
 {% block body %}
 <header>
     <nav>
         <a href="{% url 'home' %}">Домашняя страница</a>
-        <a href="{% url 'book' 'now'%}">Выбрать другой день</a>
+        <a href="{% url 'book' 'now'%}">Вернуться</a>
     </nav>
 </header>
 <div class="main_manager">

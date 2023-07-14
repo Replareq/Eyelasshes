@@ -1,4 +1,3 @@
-
 header, footer{
     background: linear-gradient(to right, #696969, 20%, #FEFEFE);
     position: relative;
@@ -39,9 +38,9 @@ nav > a:hover{
     background-color: #F7F7F7;
     position: relative;
     width: 100%;
-    height: 120%;
+    min-height: calc(100vh - 150px);
 
-    padding: 0 0 50px 0;
+    padding-bottom: 50px;
 }
 
 .heading{
@@ -66,7 +65,7 @@ nav > a:hover{
 
     position: relative;
 
-    width: 75%;
+    width: calc(80% - 50px);
     height: 50%;
     left: 10%;
 
@@ -84,6 +83,8 @@ nav > a:hover{
 
     background: #efefef;
     border: 3px solid #dddddd;
+
+    cursor: pointer;
 }
 
 #selectMonth:hover {
@@ -194,7 +195,7 @@ td {
 
 .block_day{
     width: 100%;
-    height: 12vh;
+    height: 7vw;
 
     cursor: pointer;
 }
@@ -209,14 +210,14 @@ td {
 
 .block_choose_day{
     position: absolute;
-    left: 25%;
-    top: 22%;
+    left: 0%;
+    top: 0%;
 
-    width: 50%;
-    height: 50%;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
 
     background-color: #FEFEFE;
-	border: 2px solid #dddddd;
+	border: 5px solid #dddddd;
 
 	z-index: 5;
 	cursor: default;
@@ -242,24 +243,31 @@ td {
 }
 
 .postscriptum{
-    background-color: #F7F7F7;
+    /*background-color: #F7F7F7;
     position: relative;
-    width: 100%;
+    width: calc(100% - 50px);
 
-    padding: 0 0 50px 0;
-}
+    padding: 0 0 50px 0;*/
 
-.paragraph_ps{
+    position: relative;
+
     background-color: #FEFEFE;
     border: solid 1px #f2f2f2;
     box-shadow: 0 2px 10px #000;
 
-    position: relative;
+    width: calc(80% - 50px);
 
-    width: 75%;
     left: 10%;
+    top: 25px;
 
     padding: 25px;
+}
+
+.paragraph_ps{
+    position: relative;
+
+    width: 100%;
+    height: 100%;
 
     font-family: Tahoma;
     font-size: 1.1vw;
