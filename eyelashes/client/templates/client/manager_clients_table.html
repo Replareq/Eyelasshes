@@ -3,6 +3,7 @@
 {% block tittle %} {{the_tittle}} {% endblock %}
 {% block stylelink %}
 <link rel="stylesheet" href="{% static 'client/css/managerstyle.css' %}">
+<link rel="stylesheet" href="{% static 'client/css/mmanagerstyle.css' %}">
 <script>
     var csrf = "{{ csrf_token }}";
     var remove_client_link = "{% url 'manager_remove_client' %}";
@@ -33,7 +34,8 @@
             </form>
         </div>
         <br/>
-        <table>
+        <div class="tableDivStyle">
+            <table>
             <tr>
                 <th> <input id="clients_choose" type="checkbox" onclick="onClickCheckClient(id)"/> </th>
                 <th>ID</th>
@@ -67,7 +69,7 @@
                     </button>
                 </td>
                 <td class="tableHistoryClient">
-                    {{client.history}}
+                    <div class="tableHistoryClient">{{client.history}}</div>
                 </td>
                 <!--<td>
                     Не использовать
@@ -77,6 +79,8 @@
             </tr>
             {% endfor %}
         </table>
+        </div>
+
     </div>
 </div>
 {% endblock%}

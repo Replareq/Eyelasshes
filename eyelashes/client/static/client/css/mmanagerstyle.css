@@ -1,0 +1,83 @@
+@media all and (max-width: 900px){
+    .headingH1{
+        font-size: 5vw;
+    }
+
+    .tittleBlock{
+        width: calc((90% - 18px) / 3);
+
+        font-size: 3vw;
+    }
+
+    #clientsBlock{
+        border-radius: 0 0 5px 5px;
+    }
+
+    #searchClient, #searchClientButton, #addClientButton, #removeClientButton{
+        width: 90%;
+        left: 5%;
+
+        font-size: 4vw;
+
+        margin: 0 0;
+    }
+
+    #searchClient{
+        width: 70%;
+    }
+
+    #searchClientButton{position: absolute;
+        position: absolute;
+        top: 25px;
+        left: auto;
+        right: 5%;
+        width: 10%;
+    }
+
+    #addClientButton, #removeClientButton{
+        display: block;
+
+        margin-top: 20px;
+    }
+
+    #addClientBlock > form > input,  #addClientBlock > form > textarea, #addClientBlock > form > label {
+        width: 90%;
+        left: 4%;
+
+        font-size: 5vw;
+    }
+
+    #addClientBlock > form > textarea {
+        min-width: 90%;
+        max-width: 90%;
+
+        min-height: 100px;
+        max-height: 100px;
+    }
+
+    .tableDivStyle{
+        overflow-y: auto;
+    }
+
+    th {
+        font-size: 3vw;
+    }
+
+    .tableIDClient{
+        font-size: 3.5vw;
+    }
+
+    .tableNameClient > div, .tableTelClient > div, .tableHistoryClient, .tableBanClient > button{
+        font-size: 2.5vw;
+    }
+
+    table{
+         table-layout: fixed;
+    }
+
+    .tableHistoryClient{
+        width: 300px;
+
+        padding: 4px 7px;
+    }
+}
