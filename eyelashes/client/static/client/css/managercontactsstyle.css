@@ -53,7 +53,7 @@ nav > a:hover{
 
     position: relative;
 
-    width: 75%;
+    width: calc(80% - 50px);
     left: 10%;
     top: 10%;
 
@@ -61,8 +61,10 @@ nav > a:hover{
 }
 
 .contacts > p{
+    text-align: center;
+
     font-family: Tahoma;
-    font-size: 20px;
+    font-size: 1.4vw;
     color: #696969;
 
     text-shadow: 1px 1px 1px #020202;
@@ -70,6 +72,26 @@ nav > a:hover{
     padding: 7px 0 0 0;
 }
 
+H2 {
+    text-align: center;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: 2vw;
+    color: #696969;
+
+    margin: 25px 0 0 0;
+}
+
 footer > nav{
     text-align: left;
+}
+
+@media all and (max-width: 900px){
+    .contacts > p{
+        font-size: 4vw;
+    }
+
+    H2 {
+        font-size: 7vw;
+    }
 }
