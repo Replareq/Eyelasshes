@@ -3,6 +3,7 @@
 {% block tittle %} {{the_tittle}} {% endblock %}
 {% block stylelink %}
 <link rel="stylesheet" href="{% static 'client/css/managerstyle.css' %}">
+<link rel="stylesheet" href="{% static 'client/css/mmanagerstyle.css' %}">
 <script>
     var csrf = "{{ csrf_token }}";
     var remove_booking_link = "{% url 'manager_remove_booking' %}";
@@ -34,7 +35,8 @@
             </form>
         </div>
         <br/>
-        <table>
+        <div class="tableDivStyle">
+            <table>
             <tr>
                 <th> <input id="booking_choose" type="checkbox" onclick="onClickCheckBooking(this)"/> </th>
                 <th>ID</th>
@@ -53,10 +55,10 @@
                     {{book.id}}
                 </td>
                 <td class="tableDateBooking">
-                    {{book.datetime.date}}
+                    <div>{{book.datetime.date}}</div>
                 </td>
                 <td class="tableTimeBooking">
-                    {{book.datetime.time}}
+                    <div>{{book.datetime.time}}</div>
                 </td>
                 <td class="tableNameClient">
                     <div>{{book.client.name}}</div>
@@ -70,6 +72,7 @@
             </tr>
             {% endfor %}
         </table>
+        </div>
     </div>
 </div>
 {% endblock%}

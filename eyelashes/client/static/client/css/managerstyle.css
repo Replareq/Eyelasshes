@@ -210,6 +210,8 @@ table {
 	border: 1px solid #dddddd;
 	border-collapse: collapse;
 
+	width: 100%;
+
 	font-family: Tahoma;
 }
 
@@ -242,9 +244,10 @@ td {
 }
 
 .tableIDClient, .tableNameClient > div, .tableTelClient > div, .tableHistoryClient,
-.tableDateBooking, .tableTimeBooking{
+.tableDateBooking > div, .tableTimeBooking > div{
     font-size: 1.2vw;
     text-shadow: 0 0 1px #020202;
+    padding: 0 7px;
 }
 
 .tableBanClient {
@@ -268,6 +271,8 @@ td {
     font-family: Tahoma;
     font-size: 1.2vw;
     text-shadow: 0 0 1px #020202;
+
+    padding: 0 7px;
 }
 
 /*Booking Block*/
